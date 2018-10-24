@@ -25,16 +25,15 @@ router.post('/user', async (req, res, next) => {
   } catch (err) { // User not exist, verify Particle act
     try {
       let email = req.body.email;
-      res.status(400).send("line worked");
+      let password = req.body.password;
+      const data = await particle.login({ username: email, password: password });
+      // Retrive device id
+      // TODO: choose a specific device if there are multiple
+      let at = data.body.access_token;
+      res.status(200).send("Registered");
     } catch (err) {
       res.status(400).send("line didn't work");
-    }
-    //   let password = req.body.password;
-    //   const data = await particle.login({ username: email, password: password });
-    //   // Retrive device id
-    //   // TODO: choose a specific device if there are multiple
-    //   let at = data.body.access_token;
-    //   const devicesRes = await fetch(config.particleEndPointUrl + config.particleDevicesApi + '?access_token=' + at, {method: 'GET'});
+    }    //   const devicesRes = await fetch(config.particleEndPointUrl + config.particleDevicesApi + '?access_token=' + at, {method: 'GET'});
     //   const devices = await devicesRes.json();
     //   if (devices.length == 0) {
     //     res.status(400).status("No devices");
