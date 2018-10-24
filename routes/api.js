@@ -20,7 +20,7 @@ router.post('/user', async (req, res, next) => {
     await db.connect(process.env.MONGO_URL || config.mongodbUrl, config.dbName);
     await db.find(config.usersCollection, { "email": req.body.email });
     // User existed
-    res.status(400).send("User already existed");
+    res.status(400).send("Username already exists, please return to Login page");
   } catch (err) { // User not exist, verify Particle act
     try {
       let email = req.body.email;
@@ -41,7 +41,7 @@ router.post('/user', async (req, res, next) => {
       await db.insertOne(config.usersCollection, { "userid": userId, "email": email, "hash": hash, "did": deviceId, "at": at });
       res.status(200).send("Registered");
     } catch (err) {
-      res.status(400).send("Error registering user"); 
+      res.status(400).send("Error registering user!"); 
     }  
   }
 })
