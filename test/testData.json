@@ -4,7 +4,9 @@
         "password": "faketoo"
     },
     "realParticleAct": {
-        "email": "ko.wing.bird@gmail.com",
-        "password": "qaz123QAZ"
+        // "email": "ko.wing.bird@gmail.com",
+        // "password": "qaz123QAZ"
+        "email": "ericpeltola@gmail.com",
+        "password": "testtest"
     }
 }
