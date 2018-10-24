@@ -25,7 +25,7 @@ router.post('/user', async (req, res, next) => {
   } catch (err) { // User not exist, verify Particle act
     try {
       let email = req.body.email;
-      res.status(200).send("line worked");
+      res.status(400).send("line worked");
     } catch (err) {
       res.status(400).send("line didn't work");
     }
