@@ -14,6 +14,7 @@ var db = new DB();
 // Middleware to restrict access to only authenticated users
 var apiAuth = require('../auth/apiAuth');
 
+// TESTING TESTING
 // Register an user using Particle act
 router.post('/user', async (req, res, next) => {
   try {
@@ -24,27 +25,64 @@ router.post('/user', async (req, res, next) => {
   } catch (err) { // User not exist, verify Particle act
     try {
       let email = req.body.email;
-      let password = req.body.password;
-      const data = await particle.login({ username: email, password: password });
-      // Retrive device id
-      // TODO: choose a specific device if there are multiple
-      let at = data.body.access_token;
-      const devicesRes = await fetch(config.particleEndPointUrl + config.particleDevicesApi + '?access_token=' + at, {method: 'GET'});
-      const devices = await devicesRes.json();
-      if (devices.length == 0) {
-        res.status(400).status("No devices");
-      }
-      let deviceId = devices[0]['id'];
-      // Generate userid, password hash then save user to db
-      let userId = djb2(email);
-      let hash = bcrypt.hashSync(password, config.salt);
-      await db.insertOne(config.usersCollection, { "userid": userId, "email": email, "hash": hash, "did": deviceId, "at": at });
-      res.status(200).send("Registered");
+      res.status(200).send("line worked");
     } catch (err) {
-      res.status(400).send("Error registering user!"); 
-    }  
+      res.status(400).send("line didn't work");
+    }
+    //   let password = req.body.password;
+    //   const data = await particle.login({ username: email, password: password });
+    //   // Retrive device id
+    //   // TODO: choose a specific device if there are multiple
+    //   let at = data.body.access_token;
+    //   const devicesRes = await fetch(config.particleEndPointUrl + config.particleDevicesApi + '?access_token=' + at, {method: 'GET'});
+    //   const devices = await devicesRes.json();
+    //   if (devices.length == 0) {
+    //     res.status(400).status("No devices");
+    //   }
+    //   let deviceId = devices[0]['id'];
+    //   // Generate userid, password hash then save user to db
+    //   let userId = djb2(email);
+    //   let hash = bcrypt.hashSync(password, config.salt);
+    //   await db.insertOne(config.usersCollection, { "userid": userId, "email": email, "hash": hash, "did": deviceId, "at": at });
+    //   res.status(200).send("Registered");
+    // } catch (err) {
+    //   res.status(400).send("Error registering user!"); 
+    // }  
   }
 })
+
+//  BELOW WORKS, PRESUMABLY...
+// // Register an user using Particle act
+// router.post('/user', async (req, res, next) => {
+//   try {
+//     await db.connect(process.env.MONGO_URL || config.mongodbUrl, config.dbName);
+//     await db.find(config.usersCollection, { "email": req.body.email });
+//     // User existed
+//     res.status(400).send("Username already exists, please return to Login page");
+//   } catch (err) { // User not exist, verify Particle act
+//     try {
+//       let email = req.body.email;
+//       let password = req.body.password;
+//       const data = await particle.login({ username: email, password: password });
+//       // Retrive device id
+//       // TODO: choose a specific device if there are multiple
+//       let at = data.body.access_token;
+//       const devicesRes = await fetch(config.particleEndPointUrl + config.particleDevicesApi + '?access_token=' + at, {method: 'GET'});
+//       const devices = await devicesRes.json();
+//       if (devices.length == 0) {
+//         res.status(400).status("No devices");
+//       }
+//       let deviceId = devices[0]['id'];
+//       // Generate userid, password hash then save user to db
+//       let userId = djb2(email);
+//       let hash = bcrypt.hashSync(password, config.salt);
+//       await db.insertOne(config.usersCollection, { "userid": userId, "email": email, "hash": hash, "did": deviceId, "at": at });
+//       res.status(200).send("Registered");
+//     } catch (err) {
+//       res.status(400).send("Error registering user!"); 
+//     }  
+//   }
+// })
 
 // Authenticate user
 router.post('/auth', async (req, res, next) => {
