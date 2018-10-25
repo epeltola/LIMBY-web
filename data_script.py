@@ -7,7 +7,8 @@ import time
 
 def save(data):
     '''save weight data to mLab'''
-    uri = 'mongodb://root:toor@ds155577.mlab.com:55577/limby'
+    # uri = 'mongodb://root:toor@ds155577.mlab.com:55577/limby'
+    uri = 'mongodb://root:toor@ds155577.mlab.com:55577/LAMBO'
     client = pymongo.MongoClient(uri)
     db = client.get_database()
     col = db.Data
