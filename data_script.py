@@ -17,6 +17,7 @@ def save(data):
     doc = {}
     doc["userid"]=userid
     doc["time"] = int(round(time.time() * 1000))
+    # val = data[29:36].decode("utf-8")
     val = data[29:36].decode("utf-8")
     print(val)
     doc["value"] = int(float(val))
@@ -24,10 +25,7 @@ def save(data):
     col.insert_one(doc)  
 
 def on_receive(data):
-	"""callback function for Particle stream
-	"""
-	if len(data) > 5:	# omit :OK in response
-		save(data)
+    print(data)
 
 def sync(deviceId, accessToken):
 	"""sync data from Particle to mLab of given device id
