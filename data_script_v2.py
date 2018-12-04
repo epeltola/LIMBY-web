@@ -14,8 +14,8 @@ def save(data):
     client = pymongo.MongoClient(uri)
     db = client.get_database()
     col = db.Data
-    # userid = 143744072
-    userid = -470610416
+    # userid = 143744072 #Ko Wing Bird - user ID for mLab
+    userid = -470610416 #Eric Peltola - user ID for mLab
     doc = {}
     doc["userid"]=userid
     doc["time"] = int(round(time.time() * 1000))
@@ -48,9 +48,9 @@ def main():
     # deviceId = '3e002d000e47363336383437' #sparkling_badger
     #deviceId = '360034001847343438323536' #hamster_wizard
     deviceId = '360057000351353530373132' #bird_girder
-    #accessToken = 'c4fbea34670f7726445924aac6ac3fa89f31d7f1'
+    #accessToken = 'c4fbea34670f7726445924aac6ac3fa89f31d7f1' #Ko Wing Bird
     accessToken = '412d6c5b6ff724d409f5494ea4f52ed748bf5ba6' #Eric Peltola
-    # accessToken = '65bb9f5f762c30c7899f802bb7eb6cd522cfb6b9'
+    # accessToken = '65bb9f5f762c30c7899f802bb7eb6cd522cfb6b9' #unknown
     sync(deviceId, accessToken)
 
 if __name__ == "__main__":
