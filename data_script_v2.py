@@ -45,9 +45,11 @@ def sync(deviceId, accessToken):
 		print(errstr)
 
 def main():
-    # deviceId = '360057000351353530373132'
-    deviceId = '360034001847343438323536'
-    accessToken = 'c4fbea34670f7726445924aac6ac3fa89f31d7f1'
+    # deviceId = '3e002d000e47363336383437' #sparkling_badger
+    #deviceId = '360034001847343438323536' #hamster_wizard
+    deviceId = '360057000351353530373132' #bird_girder
+    #accessToken = 'c4fbea34670f7726445924aac6ac3fa89f31d7f1'
+    accessToken = '412d6c5b6ff724d409f5494ea4f52ed748bf5ba6' #Eric Peltola
     # accessToken = '65bb9f5f762c30c7899f802bb7eb6cd522cfb6b9'
     sync(deviceId, accessToken)
 
